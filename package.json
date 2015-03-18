@@ -1,0 +1,19 @@
+{
+  "name": "webrtc-authentication",
+  "version": "0.0.0",
+  "description": "Authentication module for webrtc client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "webrtc-core": "git+ssh://git.broadsoftlabs.net:7922/wrtc/webrtc-core.git",
+    "templatizer": "~1.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.broadsoftlabs.net:7922/wrtc/authentication.git"
+  },
+  "author": "Dominik Steiner",
+  "license": "ISC"
+}
