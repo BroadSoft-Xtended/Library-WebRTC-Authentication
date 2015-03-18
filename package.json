@@ -4,10 +4,13 @@
   "description": "Authentication module for webrtc client",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "make"
   },
   "dependencies": {
-    "webrtc-core": "git+ssh://git.broadsoftlabs.net:7922/wrtc/webrtc-core.git",
+    "webrtc-core": "git+ssh://git.broadsoftlabs.net:7922/wrtc/webrtc-core.git"
+  },
+  "devDependencies": {
     "templatizer": "~1.2.1"
   },
   "repository": {
