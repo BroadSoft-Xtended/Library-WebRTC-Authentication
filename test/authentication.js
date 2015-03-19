@@ -1,22 +1,15 @@
 var jsdom = require('mocha-jsdom');
 expect = require('expect');
-
-jsdom({
-  src: [
-    // fs.readFileSync('js/jquery-1.11.0.js', 'utf-8'), 
-    // fs.readFileSync('js/jquery-cookie-1.3.1.js', 'utf-8'),
-    // fs.readFileSync('js/jquery-ui-1.10.3.custom.js', 'utf-8')
-  ]
-});
+jsdom({});
 
 describe('authentication', function () {
 
   before(function(){
     core = require('webrtc-core');
     testUA = core.testUA;
-    testUA.createModelAndView('authentication', require('../'));
-    testUA.createCore('sipstack');
     testUA.createCore('configuration');
+    testUA.createCore('sipstack');
+    testUA.createModelAndView('authentication', {authentication: require('../')});
     testUA.mockWebRTC();
   });
 
