@@ -35,9 +35,10 @@
       text-align center
       color #FF0000
 
-  .client:not(.disconnected).authentication-shown .authPopup
+  .authPopup:not(.disconnected).authentication-shown
     {fadeInPopup}
 
-  .client.disconnected .authPopup, .client:not(.authentication-shown) .authPopup
+  .authPopup.disconnected, 
+  .authPopup:not(.authentication-shown) 
     {fadeOut}
 
