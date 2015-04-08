@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "symlinks"
+    "postinstall": "make symlinks"
   },
   "dependencies": {
-    "webrtc-core": "git+ssh://git.broadsoftlabs.net:7922/wrtc/webrtc-core.git"
   },
   "devDependencies": {
+    "webrtc-core": "git+ssh://git.broadsoftlabs.net:7922/wrtc/webrtc-core.git",
     "templatizer": "1.2.1",
     "mocha": "2.1.0",
     "jsdom": "3.1.0",
