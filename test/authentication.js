@@ -18,24 +18,24 @@ describe('authentication', function() {
 
     it('authentication show and hide', function() {
         eventbus.toggleView(core.constants.VIEW_AUTHENTICATION);
+        authentication.visible = true;
         expect(authentication.classes.indexOf('authentication-shown')).toNotEqual(-1);
         testUA.isVisible(authenticationview.authPopup, true);
-        eventbus.toggleView(core.constants.VIEW_AUTHENTICATION);
+        authentication.visible = false;
         testUA.isVisible(authenticationview.authPopup, false);
     });
 
     it('on 403 : with settingUserId:', function() {
         configuration.userid = '12345';
         testUA.connect();
-        expect(authenticationview.visible).toEqual(false);
         testUA.registrationFailed(403);
-        expect(authenticationview.visible).toEqual(true);
+        expect(authentication.visible).toEqual(true);
         expect(authenticationview.userid.val()).toEqual('12345');
         expect(authenticationview.authUserid.val()).toEqual('');
         expect(authenticationview.password.val()).toEqual('');
         testUA.val(authenticationview.password, "121212");
         authenticationview.ok.trigger("click");
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
         expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:12345@' + core.defaults.domainFrom);
         expect(sipstack.ua.configuration.authorization_user).toEqual('12345');
         expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId : ' + configuration.userid);
@@ -52,12 +52,12 @@ describe('authentication', function() {
         configuration.authenticationUserid = '54321';
         configuration.password = '';
         testUA.connect();
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(403);
         testUA.val(authenticationview.password, "121212");
         expect(authentication.password).toEqual('121212');
         authenticationview.ok.trigger("click");
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
         expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:12345@' + core.defaults.domainFrom);
         expect(sipstack.ua.configuration.authorization_user).toEqual('54321');
         expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId');
@@ -119,9 +119,9 @@ describe('authentication', function() {
         configuration.userid = '12345';
         configuration.password = 'password';
         testUA.connect();
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(403);
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
     });
 
     it('on 403 : with settingAuthenticationUserId and settingPassword and settingUserId', function() {
@@ -129,16 +129,16 @@ describe('authentication', function() {
         configuration.authenticationUserid = '54321';
         configuration.password = 'password';
         testUA.connect();
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(403);
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
     });
 
     it('on non 403', function() {
         $.cookie('settingUserId', '12345');
         testUA.connect();
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(404);
-        expect(authenticationview.visible).toEqual(false);
+        expect(authentication.visible).toEqual(false);
     });
 });
