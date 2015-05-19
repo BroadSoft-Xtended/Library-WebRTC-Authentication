@@ -16,8 +16,7 @@ describe('authentication', function() {
         testUA.mockWebRTC();
     });
 
-    it('authentication show and hide', function() {
-        eventbus.toggleView(core.constants.VIEW_AUTHENTICATION);
+    it('show and hide', function() {
         authentication.visible = true;
         expect(authentication.classes.indexOf('authentication-shown')).toNotEqual(-1);
         testUA.isVisible(authenticationview.authPopup, true);
@@ -141,4 +140,13 @@ describe('authentication', function() {
         testUA.registrationFailed(404);
         expect(authentication.visible).toEqual(false);
     });
+
+    it('authenticate and registered', function() {
+        authentication.userid = 'testuserid';
+        authentication.password = 'testpassword';
+        authentication.authenticate();
+        eventbus.emit('registered');
+        expect(configuration.password).toEqual('testpassword');
+        expect(configuration.userid).toEqual('testuserid');
+    });    
 });
