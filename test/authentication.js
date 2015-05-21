@@ -12,7 +12,7 @@ describe('authentication', function() {
         testUA.createModelAndView('authentication', {
             authentication: require('../')
         });
-        eventbus = bdsft_client_instances.eventbus_test;
+        eventbus = bdsft_client_instances.test.eventbus;
         testUA.mockWebRTC();
     });
 
