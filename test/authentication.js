@@ -142,11 +142,19 @@ describe('authentication', function() {
     });
 
     it('authenticate and registered', function() {
+        authentication.visible = true;
         authentication.userid = 'testuserid';
         authentication.password = 'testpassword';
         authentication.authenticate();
         eventbus.emit('registered');
         expect(configuration.password).toEqual('testpassword');
         expect(configuration.userid).toEqual('testuserid');
+        expect(authentication.visible).toEqual(false);
+    });    
+
+    it('on registered', function() {
+        authentication.visible = true;
+        eventbus.emit('registered');
+        expect(authentication.visible).toEqual(false);
     });    
 });
