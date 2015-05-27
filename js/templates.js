@@ -16,7 +16,7 @@
 
     // authentication.jade compiled template
     templatizer["authentication"] = function tmpl_authentication() {
-        return '<div class="bdsft-client"><div class="authPopup fadeable popup classes"><span>User ID</span><br/><input type="text" value="" class="userid"/><br/><span>Auth User ID</span><br/><input type="text" value="" class="authUserid"/><br/><span>Password</span><br/><input type="password" value="" class="password"/><br/><br/><div class="alert"></div><button type="button" class="ok button">Sign in</button></div></div>';
+        return '<div class="bdsft-client"><div class="authPopup fadeable popup classes centered"><span>User ID</span><br/><input type="text" value="" class="userid"/><br/><span>Auth User ID</span><br/><input type="text" value="" class="authUserid"/><br/><span>Password</span><br/><input type="password" value="" class="password"/><br/><br/><div class="alert"></div><button type="button" class="ok button">Sign in</button></div></div>';
     };
 
     return templatizer;
