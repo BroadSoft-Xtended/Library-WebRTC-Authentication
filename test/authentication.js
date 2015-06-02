@@ -7,7 +7,7 @@ describe('authentication', function() {
     before(function() {
         core = require('webrtc-core');
         testUA = core.testUA;
-        testUA.createCore('configuration');
+        testUA.createCore('cookieconfig');
         testUA.createCore('sipstack');
         testUA.createModelAndView('authentication', {
             authentication: require('../')
@@ -25,7 +25,7 @@ describe('authentication', function() {
     });
 
     it('on 403 : with settingUserId:', function() {
-        configuration.userid = '12345';
+        cookieconfig.userid = '12345';
         testUA.connect();
         testUA.registrationFailed(403);
         expect(authentication.visible).toEqual(true);
@@ -35,21 +35,21 @@ describe('authentication', function() {
         testUA.val(authenticationview.password, "121212");
         authenticationview.ok.trigger("click");
         expect(authentication.visible).toEqual(false);
-        expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:12345@' + core.defaults.domainFrom);
+        expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:12345@' + sipstack.domainFrom);
         expect(sipstack.ua.configuration.authorization_user).toEqual('12345');
-        expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId : ' + configuration.userid);
-        expect(configuration.authenticationUserid).toEqual(undefined, 'should NOT set configuration authenticationUserId : ' + configuration.authenticationUserid);
-        expect(configuration.password).toEqual(undefined, 'should NOT set configuration password : ' + configuration.password);
+        expect(cookieconfig.userid).toEqual('12345', 'should NOT change configuration userId : ' + cookieconfig.userid);
+        expect(cookieconfig.authenticationUserid).toEqual(undefined, 'should NOT set configuration authenticationUserId : ' + cookieconfig.authenticationUserid);
+        expect(cookieconfig.password).toEqual(undefined, 'should NOT set configuration password : ' + cookieconfig.password);
         testUA.registered();
-        expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId : ' + configuration.userid);
-        expect(configuration.authenticationUserid).toEqual(undefined, 'should NOT set configuration authenticationUserId as same as userId : ' + configuration.authenticationUserid);
-        expect(configuration.password).toEqual('121212', 'should set configuration password : ' + configuration.password);
+        expect(cookieconfig.userid).toEqual('12345', 'should NOT change configuration userId : ' + cookieconfig.userid);
+        expect(cookieconfig.authenticationUserid).toEqual(undefined, 'should NOT set configuration authenticationUserId as same as userId : ' + cookieconfig.authenticationUserid);
+        expect(cookieconfig.password).toEqual('121212', 'should set configuration password : ' + cookieconfig.password);
     });
 
     it('on 403 : with settingUserId and settingAuthenticationUserId:', function() {
-        configuration.userid = '12345';
-        configuration.authenticationUserid = '54321';
-        configuration.password = '';
+        cookieconfig.userid = '12345';
+        cookieconfig.authenticationUserid = '54321';
+        cookieconfig.password = '';
         testUA.connect();
         expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(403);
@@ -57,19 +57,19 @@ describe('authentication', function() {
         expect(authentication.password).toEqual('121212');
         authenticationview.ok.trigger("click");
         expect(authentication.visible).toEqual(false);
-        expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:12345@' + core.defaults.domainFrom);
+        expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:12345@' + sipstack.domainFrom);
         expect(sipstack.ua.configuration.authorization_user).toEqual('54321');
-        expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId');
-        expect(configuration.authenticationUserid).toEqual('54321', 'should NOT change configuration authenticationUserId');
-        expect(configuration.password).toEqual('', 'should NOT set configuration password : ' + configuration.password);
+        expect(cookieconfig.userid).toEqual('12345', 'should NOT change configuration userId');
+        expect(cookieconfig.authenticationUserid).toEqual('54321', 'should NOT change configuration authenticationUserId');
+        expect(cookieconfig.password).toEqual('', 'should NOT set configuration password : ' + cookieconfig.password);
         testUA.registered();
-        expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId');
-        expect(configuration.authenticationUserid).toEqual('54321', 'should NOT change configuration authenticationUserId as same as userId');
-        expect(configuration.password).toEqual('121212', 'should set configuration password');
+        expect(cookieconfig.userid).toEqual('12345', 'should NOT change configuration userId');
+        expect(cookieconfig.authenticationUserid).toEqual('54321', 'should NOT change configuration authenticationUserId as same as userId');
+        expect(cookieconfig.password).toEqual('121212', 'should set configuration password');
     });
 
     it('on 403 : with settingUserId and authUserId changed', function() {
-        configuration.userid = '12345';
+        cookieconfig.userid = '12345';
         testUA.connect();
         testUA.registrationFailed(403);
         testUA.val(authenticationview.authUserid, "54321");
@@ -77,30 +77,30 @@ describe('authentication', function() {
         authenticationview.ok.trigger("click");
         expect(sipstack.ua.configuration.authorization_user).toEqual('54321');
         testUA.registered();
-        expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId');
-        expect(configuration.authenticationUserid).toEqual('54321', 'should set configuration authenticationUserId');
-        expect(configuration.password).toEqual('121212', 'should set configuration password');
+        expect(cookieconfig.userid).toEqual('12345', 'should NOT change configuration userId');
+        expect(cookieconfig.authenticationUserid).toEqual('54321', 'should set configuration authenticationUserId');
+        expect(cookieconfig.password).toEqual('121212', 'should set configuration password');
     });
 
     it('on 403 : with settingUserId and userId and authUserId changed', function() {
-        configuration.userid = '12345';
+        cookieconfig.userid = '12345';
         testUA.connect();
         testUA.registrationFailed(403);
         testUA.val(authenticationview.userid, "23456");
         testUA.val(authenticationview.authUserid, "54321");
         testUA.val(authenticationview.password, "121212");
         authenticationview.ok.trigger("click");
-        expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:23456@' + core.defaults.domainFrom);
+        expect(sipstack.ua.configuration.uri.toString()).toEqual('sip:23456@' + sipstack.domainFrom);
         expect(sipstack.ua.configuration.authorization_user).toEqual('54321');
         testUA.registered();
-        expect(configuration.userid).toEqual('23456', 'should change configuration userId');
-        expect(configuration.authenticationUserid).toEqual('54321', 'should set configuration authenticationUserId');
-        expect(configuration.password).toEqual('121212', 'should set configuration password');
+        expect(cookieconfig.userid).toEqual('23456', 'should change configuration userId');
+        expect(cookieconfig.authenticationUserid).toEqual('54321', 'should set configuration authenticationUserId');
+        expect(cookieconfig.password).toEqual('121212', 'should set configuration password');
     });
 
     it('123:on 403 : with settingUserId and configurationAuthenticationUserId and userId changed', function() {
-        configuration.userid = '12345';
-        configuration.authenticationUserid = '54321';
+        cookieconfig.userid = '12345';
+        cookieconfig.authenticationUserid = '54321';
         testUA.connect();
         testUA.registrationFailed(403);
         testUA.val(authenticationview.userid, "12345");
@@ -109,14 +109,14 @@ describe('authentication', function() {
         authenticationview.ok.trigger("click");
         expect(sipstack.ua.configuration.authorization_user).toEqual('98765');
         testUA.registered();
-        expect(configuration.userid).toEqual('12345', 'should NOT change configuration userId');
-        expect(configuration.authenticationUserid).toEqual('98765', 'should change configuration authenticationUserId');
-        expect(configuration.password).toEqual('121212', 'should set configuration password');
+        expect(cookieconfig.userid).toEqual('12345', 'should NOT change configuration userId');
+        expect(cookieconfig.authenticationUserid).toEqual('98765', 'should change configuration authenticationUserId');
+        expect(cookieconfig.password).toEqual('121212', 'should set configuration password');
     });
 
     it('on 403 : with settingPassword and settingUserId', function() {
-        configuration.userid = '12345';
-        configuration.password = 'password';
+        cookieconfig.userid = '12345';
+        cookieconfig.password = 'password';
         testUA.connect();
         expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(403);
@@ -124,9 +124,9 @@ describe('authentication', function() {
     });
 
     it('on 403 : with settingAuthenticationUserId and settingPassword and settingUserId', function() {
-        configuration.userid = '12345';
-        configuration.authenticationUserid = '54321';
-        configuration.password = 'password';
+        cookieconfig.userid = '12345';
+        cookieconfig.authenticationUserid = '54321';
+        cookieconfig.password = 'password';
         testUA.connect();
         expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(403);
@@ -134,7 +134,7 @@ describe('authentication', function() {
     });
 
     it('on non 403', function() {
-        $.cookie('settingUserId', '12345');
+        cookieconfig.userid = '12345';
         testUA.connect();
         expect(authentication.visible).toEqual(false);
         testUA.registrationFailed(404);
@@ -147,8 +147,8 @@ describe('authentication', function() {
         authentication.password = 'testpassword';
         authentication.authenticate();
         eventbus.emit('registered');
-        expect(configuration.password).toEqual('testpassword');
-        expect(configuration.userid).toEqual('testuserid');
+        expect(cookieconfig.password).toEqual('testpassword');
+        expect(cookieconfig.userid).toEqual('testuserid');
         expect(authentication.visible).toEqual(false);
     });    
 
