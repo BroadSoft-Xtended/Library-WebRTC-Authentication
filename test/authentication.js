@@ -165,6 +165,18 @@ describe('authentication', function() {
         expect(authentication.visible).toEqual(false);
     });
 
+    it('WRTC-16 : on 404 with register = false and PAI', function() {
+        sipstack.registrationStatus = undefined;
+        authentication.visible = false;
+        authentication.register = false;
+        authentication.userid = 'wronguserid';
+        testUA.connect();
+        expect(authentication.visible).toEqual(false);
+        testUA.registrationFailed(404);
+        expect(authentication.visible).toEqual(false);
+        expect(sipstack.ua.configuration.p_asserted_identity).toEqual('<sip:webguest@broadsoftlabs.com>');
+    });
+
     it('on registrationStatus change', function() {
         authentication.register = true;
         sipstack.registrationStatus = '403'
