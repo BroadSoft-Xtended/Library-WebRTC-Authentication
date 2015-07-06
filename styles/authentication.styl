@@ -1,5 +1,5 @@
-.bdsft-client
-  .authPopup
+.bdsft-webrtc
+  .authenticationView
     span
       color #999999
       font-size 14px
@@ -30,11 +30,27 @@
       font-size 20px
       text-align center
       color #FF0000
+    .signIn, .signOut
+      display none
 
-  .authPopup:not(.disconnected).authentication-shown
-    {fadeInPopup}
+    &:not(.disconnected).authentication-shown,
+    &:not(.registered):not(.registering).register
+      {fadeInPopup}
 
-  .authPopup.disconnected, 
-  .authPopup:not(.authentication-shown) 
-    {fadeOut}
+    &.disconnected, 
+    &:not(.authentication-shown),
+    &.registered
+      {fadeOut}
+    
+    &:not(.registered) .signIn,
+    &.registered .signOut
+      display block
+      
+    &.registered .userid,
+    &.registered .authenticationUserid,
+    &.registered .password
+      {disabled}
+
+    &.registering .signIn, &.unregistering .signOut
+      {disabled}
 

@@ -1,12 +1,12 @@
-.bdsft-client
-  .authPopup.fadeable.popup.classes.centered
+.bdsft-webrtc
+  .authenticationView.fadeable.popup.classes.centered
     span User ID
     br
     input.userid(type='text', value='')
     br
     span Auth User ID
     br
-    input.authUserid(type='text', value='')
+    input.authenticationUserid(type='text', value='')
     br
     span Password
     br
@@ -14,5 +14,7 @@
     br
     br
     .alert
-    button.ok.button(type='button') Sign in
+    button.signIn.button(type='button') Sign in
+    br
+    button.signOut.button(type='button') Sign out
 
