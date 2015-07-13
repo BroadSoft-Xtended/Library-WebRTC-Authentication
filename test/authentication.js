@@ -1,13 +1,15 @@
-test = require('../node_modules/webrtc-core/test/includes/common');
+test = require('../node_modules/webrtc-sipstack/test/includes/common')(require('../node_modules/webrtc-core/test/includes/common'));
 describe('authentication', function() {
 
     before(function() {
         test.createCore('cookieconfig');
+        test.createModelAndView('sipstack', {
+            sipstack: require('webrtc-sipstack')
+        });
         test.createModelAndView('authentication', {
             authentication: require('../'),
             sipstack: require('webrtc-sipstack')
         });
-        sipstack = bdsft_client_instances.test.sipstack;
     });
 
     it('show and hide', function() {
