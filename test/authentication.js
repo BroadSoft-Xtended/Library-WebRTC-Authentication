@@ -8,10 +8,11 @@ describe('authentication', function() {
         core = require('webrtc-core');
         testUA = core.testUA;
         testUA.createCore('cookieconfig');
-        testUA.createCore('sipstack');
         testUA.createModelAndView('authentication', {
-            authentication: require('../')
+            authentication: require('../'),
+            sipstack: require('webrtc-sipstack')
         });
+        sipstack = bdsft_client_instances.test.sipstack;
         testUA.mockWebRTC();
     });
 
