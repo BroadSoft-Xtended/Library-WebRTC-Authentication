@@ -3,7 +3,9 @@
 Handles SIP authentication and registration.
 
 Model : bdsft_webrtc.default.authentication
+
 View : bdsft_webrtc.default.authenticationview
+
 Dependencies : [SIP Stack](https://github.com/BroadSoft-Xtended/Library-WebRTC-SIPStack)
 
 ## Elements
