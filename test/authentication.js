@@ -20,6 +20,15 @@ describe('authentication', function() {
         test.isVisible(authenticationview.view.find('.classes:first'), false);
     });
 
+    it('enableAuthenticationUserid', function() {
+        var element = authenticationview.view.find('.authenticationUseridRow');
+        test.equalCss(element, 'display', 'none');
+        authentication.enableAuthenticationUserid = true;
+        test.equalCss(element, 'display', '');
+        authentication.enableAuthenticationUserid = false;
+        test.equalCss(element, 'display', 'none');
+    });
+
     it('persist with userid set:', function() {
         authentication.userid = 'someuserid';
         expect(authenticationview.userid.val()).toEqual('someuserid');

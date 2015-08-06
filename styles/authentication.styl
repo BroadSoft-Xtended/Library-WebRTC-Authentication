@@ -33,6 +33,9 @@
     .signIn, .signOut
       display none
 
+    &:not(.enableAuthenticationUserid) .authenticationUseridRow
+      display none
+
     &:not(.disconnected).authentication-shown,
     &:not(.registered):not(.registering).register
       {fadeInPopup}
