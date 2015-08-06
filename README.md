@@ -33,6 +33,7 @@ userid                |string  |The SIP User ID that will be used for the REGIST
 
 Property  |Type     |Default  |Description
 ----------|---------|---------|-----------------------------------------------------------
+enableAuthenticationUserid  |boolean  |false    |True if the authenticationUserid should be shown.
 register  |boolean  |false    |True if authentication should be shown if not registered.
 
 ## Methods
