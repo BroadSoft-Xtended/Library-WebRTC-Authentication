@@ -1,15 +1,16 @@
-test = require('../node_modules/webrtc-sipstack/test/includes/common')(require('../node_modules/webrtc-core/test/includes/common'));
+test = require('../node_modules/webrtc-sipstack/test/includes/common')(require('../node_modules/bdsft-sdk-test/lib/common'));
 describe('authentication', function() {
 
     before(function() {
-        test.createCore('cookieconfig');
-        test.createModelAndView('sipstack', {
-            sipstack: require('webrtc-sipstack')
-        });
         test.createModelAndView('authentication', {
             authentication: require('../'),
-            sipstack: require('webrtc-sipstack')
+            sipstack: require('webrtc-sipstack'),
+            eventbus: require('bdsft-sdk-eventbus'),
+            debug: require('bdsft-sdk-debug'),
+            core: require('webrtc-core')
         });
+        sipstack = bdsft_client_instances.test.sipstack.sipstack;
+        cookieconfig = bdsft_client_instances.test.core.cookieconfig;
     });
 
     it('show and hide', function() {
